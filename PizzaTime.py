@@ -15,7 +15,7 @@ class Piza:
             
             
     def __str__(self):
-        strin = "\nIngredients: " + str(self.ingredients) + "\nScore: " + str(self.score) + "\nTeam: " + str(self.teamSize)
+        strin = "Index: " + str(self.ID)+ "\nIngredients: " + str(self.ingredients) + "\nScore: " + str(self.score) + "\nTeam: " + str(self.teamSize)
         return strin
     
     
@@ -24,11 +24,11 @@ def output():
             
 
 ingredientDict = {} #ingredients : score
-initialData = [] # numPizza, numTwo, numThree, numFour
+initialData = [] #[ numPizza, numTwo, numThree, numFour]
 pizzas = []
 
 
-with open("a_example", "r") as file:
+with open("./a_example", "r") as file:
     fileData = file.readlines()
     initialData = [int(x) for x in fileData[0].split()]
     for index,lineData in enumerate(fileData[1:]):#(index,lineData) 
@@ -44,30 +44,29 @@ with open("a_example", "r") as file:
             else:
                 ingredientDict[ing] = 1
         index += 1 
-        
+       
 pizzaCount = initialData[0]        
 for piza in pizzas:
     piza.ingredientScoreCalc()
     
 pIndex = 0
 for i in range(3,0,-1): 
-    while pizzaCount >= i+1 and int(initialData[i]) > 0:
-        initialData[i] -= 1 #decrement count of teams at index
-        pizzaCount -= 1 #decrement count of pizzas
+    while pizzaCount >= i+1 and initialData[i] > 0:
+        #decrement count of pizzas
         
         for j in range(pIndex, pIndex+i+1):#j = index for pizzas running from current pizza and accumulated 
-            try:
-                pizzas[j].setTeam(i+1)#now all Pizas will know which team they belong to
-                pIndex += 1
-            
-            except IndexError:#no more pizzas
-                break
-    
+            #print(j)
+            pizzas[j].setTeam(i+1)#now all Pizas will know which team they belong to
+            pIndex += 1
+            pizzaCount -= 1
+                
+        initialData[i] -= 1 #decrement count of teams at index
         
         
 for p in pizzas:
     print (p)
-print (initialData)            
-print (ingredientDict)
+#print(pizzaCount)
+#print (initialData)            
+#print (ingredientDict)
 
     
