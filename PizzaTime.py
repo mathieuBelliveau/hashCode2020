@@ -19,8 +19,29 @@ class Piza:
         return strin
     
     
-def output():
+def depthFirst(highScore, pizzas, initialData):#recursive
+    if pizzas = 0 or (initial[1] = 0 and initialData[2] = 0 and initialData[3] = 0):
+        return highScore
+        
+    
+def depthFirstNaive (highScore, pizzas, initialData):#shift array in every combination of 
     return
+    
+    
+    
+def sequentialPizzaAssignment(pizzaCount, pizzas,initialData):
+    pIndex = 0
+    for i in range(3,0,-1): #go through initialData
+        while pizzaCount >= i+1 and initialData[i] > 0:
+            #decrement count of pizzas
+            
+            for j in range(pIndex, pIndex+i+1):#j = index for pizzas running from current pizza and accumulated 
+                #print(j)
+                pizzas[j].setTeam(i+1)#now all Pizas will know which team they belong to
+                pIndex += 1
+                pizzaCount -= 1
+                    
+            initialData[i] -= 1 #decrement count of teams at index
             
 
 ingredientDict = {} #ingredients : score
@@ -49,19 +70,19 @@ pizzaCount = initialData[0]
 for piza in pizzas:
     piza.ingredientScoreCalc()
     
-pIndex = 0
-for i in range(3,0,-1): 
-    while pizzaCount >= i+1 and initialData[i] > 0:
-        #decrement count of pizzas
-        
-        for j in range(pIndex, pIndex+i+1):#j = index for pizzas running from current pizza and accumulated 
-            #print(j)
-            pizzas[j].setTeam(i+1)#now all Pizas will know which team they belong to
-            pIndex += 1
-            pizzaCount -= 1
-                
-        initialData[i] -= 1 #decrement count of teams at index
-        
+#sequentialPizzaAssignment(pizzaCount, pizzas,initialData)
+
+#depthFirstSearch
+#exhaust all possible combinations to find the optimal result
+#select optimal result
+#depth first search based on a score generated as pizzas are handed out to teams
+
+highScore = 0
+
+depthFirst(highScore, pizzas, initialData)
+
+
+
         
 for p in pizzas:
     print (p)
