@@ -16,13 +16,21 @@ class Piza:
             
     def __str__(self):
         strin = "Index: " + str(self.ID)+ "\nIngredients: " + str(self.ingredients) + "\nScore: " + str(self.score) + "\nTeam: " + str(self.teamSize)
-        return strin
+        return strin    
     
-    
-def depthFirst(highScore, pizzas, initialData):#recursive
-    if pizzas = 0 or (initial[1] = 0 and initialData[2] = 0 and initialData[3] = 0):
+def depthFirst(highScore, pizzas, initialData, index):#recursive
+    if pizzas.len = 0 or (initial[1] = 0 and initialData[2] = 0 and initialData[3] = 0):#also needs to account for having enough pizzas for the team size
         return highScore
         
+    pizza = pizzas[index]
+    pizzas[index] = None
+    
+    #potentially implement a list of tuples [(pizza type, count),(),()]
+    #Go through the teams, deliver the number of pizzas to the team
+    #Decrement the count, increment a highScore, go until there are either not enough pizzas or no teams
+    #Never deliver same time of pizza to a team
+    #Attempt combination of every type of pizza delivered to a team, then next team (decrement team count and pizza type count)
+    
     
 def depthFirstNaive (highScore, pizzas, initialData):#shift array in every combination of 
     return
@@ -47,7 +55,6 @@ def sequentialPizzaAssignment(pizzaCount, pizzas,initialData):
 ingredientDict = {} #ingredients : score
 initialData = [] #[ numPizza, numTwo, numThree, numFour]
 pizzas = []
-
 
 with open("./a_example", "r") as file:
     fileData = file.readlines()
@@ -79,7 +86,7 @@ for piza in pizzas:
 
 highScore = 0
 
-depthFirst(highScore, pizzas, initialData)
+depthFirst(highScore, pizzas, initialData, 0)
 
 
 
