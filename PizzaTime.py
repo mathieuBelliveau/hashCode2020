@@ -1,4 +1,4 @@
-from Collections import Counter
+from collections import Counter
 
 class Piza:
     def __init__(self, ingredients, ID, ingCount):
@@ -65,28 +65,11 @@ def findFirstNonEmpty(pizzaIndex):
     #NOTE we are evaluating combinations and not permutations, as teams don't have an identity and therefore we can't order them
     #
     
-    
-    
-def sequentialPizzaAssignment(pizzaCount, pizzas,initialData):
-    pIndex = 0
-    for i in range(3,0,-1): #go through initialData
-        while pizzaCount >= i+1 and initialData[i] > 0:
-            #decrement count of pizzas
-            
-            for j in range(pIndex, pIndex+i+1):#j = index for pizzas running from current pizza and accumulated 
-                #print(j)
-                pizzas[j].setTeam(i+1)#now all Pizas will know which team they belong to
-                pIndex += 1
-                pizzaCount -= 1
-                    
-            initialData[i] -= 1 #decrement count of teams at index
-            
 
 ingredientDict = {} #ingredients : score
 initialData = [] #[ numPizza, numTwo, numThree, numFour]
 #pizzas = []
-pizzaList = []
-counter = Counter()
+pizzaList = Counter()
 
 with open("./a_example", "r") as file:
     fileData = file.readlines()
@@ -99,46 +82,10 @@ with open("./a_example", "r") as file:
         ingredients = lineData.split()[1:]
         ingredients.sort() 
 
-        counter [tuple(ingredients)] += 1
-        
-    #convert counter to list
-    #TODO: initiate recursion, maybe more steps. Verify.
-    
-        
-        
-        
-        # pizzas.append(pizza)
-        
-        # for ing in ingredients:
-            # if ing in ingredientDict:
-                # ingredientDict[ing] += 1
-                
-            # else:
-                # ingredientDict[ing] = 1
-        # index += 1 
-       
-pizzaCount = initialData[0]        
-for piza in pizzas:
-    piza.ingredientScoreCalc()
-    
-#sequentialPizzaAssignment(pizzaCount, pizzas,initialData)
+        pizzaList [tuple(ingredients)] += 1
 
-#depthFirstSearch
-#exhaust all possible combinations to find the optimal result
-#select optimal result
-#depth first search based on a score generated as pizzas are handed out to teams
-
-highScore = 0
-
+pizzaCount = initialData[0]       
+pizzaList = list(pizzaList.items())
 depthFirst(0,0)
-
-
-
-        
-for p in pizzas:
-    print (p)
-#print(pizzaCount)
-#print (initialData)            
-#print (ingredientDict)
 
     
