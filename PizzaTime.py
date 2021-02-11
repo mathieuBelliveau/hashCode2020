@@ -1,3 +1,5 @@
+from Collections import Counter
+
 class Piza:
     def __init__(self, ingredients, ID, ingCount):
         self.ingredients = ingredients#list of ingredients text
@@ -5,6 +7,9 @@ class Piza:
         self.ingCount = ingCount
         teamSize = -1
         self.score = 0
+        
+    def getIngredientsTuple():
+        return tuple(ingredients)
     
     def ingredientScoreCalc(self):
         for item in self.ingredients:
@@ -55,9 +60,10 @@ def findFirstNonEmpty(pizzaIndex):
     #Attempt combination of every type of pizza delivered to a team, then next team (decrement team count and pizza type count)
     #Implementation: recursive function takes in # pizzas still selected for a team, and the first pizza that it's allowed to select 
     
-    
-def depthFirstNaive (highScore, pizzas, initialData):#shift array in every combination of 
-    return
+    #New Implementation (more efficient)
+    #We can assume that the first team will always take the first pizza
+    #NOTE we are evaluating combinations and not permutations, as teams don't have an identity and therefore we can't order them
+    #
     
     
     
@@ -78,25 +84,38 @@ def sequentialPizzaAssignment(pizzaCount, pizzas,initialData):
 
 ingredientDict = {} #ingredients : score
 initialData = [] #[ numPizza, numTwo, numThree, numFour]
-pizzas = []
+#pizzas = []
 pizzaList = []
+counter = Counter()
 
 with open("./a_example", "r") as file:
     fileData = file.readlines()
-    initialData = [int(x) for x in fileData[0].split()]
+    initialData = [int(x) for x in fileData[0].split()]#first line
+    
+    
+    
     for index,lineData in enumerate(fileData[1:]):#(index,lineData) 
         ingCount = lineData.split()[0:1]
         ingredients = lineData.split()[1:]
-        pizza = Piza(ingredients, index, ingCount[0])
-        pizzas.append(pizza)
+        ingredients.sort() 
+
+        counter [tuple(ingredients)] += 1
         
-        for ing in ingredients:
-            if ing in ingredientDict:
-                ingredientDict[ing] += 1
+    #convert counter to list
+    #TODO: initiate recursion, maybe more steps. Verify.
+    
+        
+        
+        
+        # pizzas.append(pizza)
+        
+        # for ing in ingredients:
+            # if ing in ingredientDict:
+                # ingredientDict[ing] += 1
                 
-            else:
-                ingredientDict[ing] = 1
-        index += 1 
+            # else:
+                # ingredientDict[ing] = 1
+        # index += 1 
        
 pizzaCount = initialData[0]        
 for piza in pizzas:
